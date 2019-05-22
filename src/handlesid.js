@@ -5,30 +5,12 @@ makeSourceBansLink = (base, sid, commslist) => {
 	return base + "?p=" + (commslist ? "commslist" : "banlist") + "&searchText=" + sid;
 }
 
-banPlayer = (sourcebans, nick, sid, time, type, reason) => {
-	var data = "xajax=" + (type == SB_GAME ? "AddBan" : "AddBlock");
-	data += "&xajaxr=" + (new Date().getTime());
-	data += "&xajaxargs[]=" + encodeURIComponent(nick);
-	data += "&xajaxargs[]=" + (type == SB_GAME ? 0 : type);
-	data += "&xajaxargs[]=" + encodeURIComponent(sid);
-	if (type == SB_GAME) {
-		data += "&xajaxargs[]="; // ip
+serializeSBRequest = (verb, args) => {
+	var data = `xajax=${verb}&xajaxr=${new Date().getTime()}`;
+	for (let arg of args) {
+		data += "&xajaxargs[]=" + encodeURIComponent(arg);
 	}
-	data += "&xajaxargs[]=" + time;
-	if (type == SB_GAME) {
-		data += "&xajaxargs[]="; // demo file
-		data += "&xajaxargs[]="; // demo file name
-	}
-	data += "&xajaxargs[]=" + encodeURIComponent(reason);
-
-	return fetch(sourcebans, {
-		method: 'POST',
-		cache: 'no-cache',
-		headers: {
-			'Content-Type': 'application/x-www-form-urlencoded'
-		},
-		body: data
-	});
+	return data;
 }
 
 renderSIDclickable = (sid) => {
@@ -161,48 +143,67 @@ handleSIDTextNode = (textNode) => {
 				el.addEventListener("click", function(e) {
 					var { time, reason, type } = e.target.dataset;
 
-					banPlayer(thisPage.section.sourcebans, nickobj.value, sid, time, type, reason)
-						.then(function (response) {
-							if (!response.ok) {
-								ShowBox("Request failed", response.statusText, "red");
-								return;
-							}
-							
-							response.text().then(function(resp) {
-								var parser = new DOMParser();
-								var xmlDoc = parser.parseFromString(resp, "text/xml");
-								for (let el of xmlDoc.getElementsByTagName("xjx")[0].getElementsByTagName("cmd")) {
+					var tosend;
+					if (type == SB_GAME) {
+						tosend = serializeSBRequest("AddBan", [
+							nickobj.value,
+							0,	// type - Steam ID ban
+							sid,
+							"", // ip
+							time,
+							0, // demo file
+							"", // demo file name
+							reason,
+							"" // fromsub
+						]);
+					} else {
+						serializeSBRequest("AddBlock", [
+							nickobj.value,
+							type,
+							sid,
+							time,
+							reason
+						]);
+					}
 
-									if (el.attributes.n.value != "js")
-										continue;
-									if (['ShowBox', 'ShowKickBox', 'ShowBlockBox'].filter((x) => el.innerHTML.startsWith(x)).length < 1)
-										continue;
-									var sb_f = new Function('ShowBox', 'ShowKickBox', 'ShowBlockBox', el.innerHTML);
-									const ShowKickBox = function(check, type) {
-										ShowBox('Ban Added',
-												'The ban has been successfully added<br>',
-												'green',
-												'index.php?p=admin&c=bans',
-												true,
-												`<iframe src="${thisPage.section.sourcebans}/pages/admin.kickit.php?check=${check}&type=${type}"></iframe>`);
-
-									};
-									const ShowBlockBox = function(check, type, length) {
-										ShowBox('Block Added',
-												'The block has been successfully added<br>',
-												'green',
-												'index.php?p=admin&c=comms',
-												true,
-												`<iframe src="${thisPage.section.sourcebans}/pages/admin.blockit.php?check=${check}&type=${type}&length=${length}"></iframe>`);
-									};
-									sb_f(ShowBox, ShowKickBox, ShowBlockBox);
-								}
-							})
-
-						});/*.catch(function(error) {
-							ShowBox("Network failure", error.message, "red");
+					chrome.runtime.sendMessage(chrome.runtime.id, {
+						action: 'SBRequest',
+						sourcebans: thisPage.section.sourcebans,
+						data: tosend
+					}, function(data, error) {
+						if (error || !data) {
+							ShowBox("Request failed", error ? error : "Unknown error. (timed out?)", "red");
 							return;
-						});*/
+						}
+
+						var parser = new DOMParser();
+						var xmlDoc = parser.parseFromString(data, "text/xml");
+						for (let el of xmlDoc.getElementsByTagName("xjx")[0].getElementsByTagName("cmd")) {
+							if (el.attributes.n.value != "js")
+								continue;
+							if (['ShowBox', 'ShowKickBox', 'ShowBlockBox'].filter((x) => el.innerHTML.startsWith(x)).length < 1)
+								continue;
+							var sb_f = new Function('ShowBox', 'ShowKickBox', 'ShowBlockBox', el.innerHTML);
+							const ShowKickBox = function(check, type) {
+								ShowBox('Ban Added',
+										'The ban has been successfully added<br>',
+										'green',
+										'index.php?p=admin&c=bans',
+										true,
+										`<iframe src="${thisPage.section.sourcebans}/pages/admin.kickit.php?check=${check}&type=${type}"></iframe>`);
+
+							};
+							const ShowBlockBox = function(check, type, length) {
+								ShowBox('Block Added',
+										'The block has been successfully added<br>',
+										'green',
+										'index.php?p=admin&c=comms',
+										true,
+										`<iframe src="${thisPage.section.sourcebans}/pages/admin.blockit.php?check=${check}&type=${type}&length=${length}"></iframe>`);
+							};
+							sb_f(ShowBox, ShowKickBox, ShowBlockBox);
+						}
+					});
 				});
 			});
 		}

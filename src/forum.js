@@ -52,7 +52,4 @@ let doPage = () => {
 }
 
 var thisPage = getThisPage();
-console.log(thisPage);
-
 doPage();
-

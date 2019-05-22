@@ -13,6 +13,7 @@
 		"*://gamesites.cz/*",
 		"*://www.gamesites.cz/*",
 		"*://hlstats.fakaheda.eu/hlxce_*/hlstats.php?mode=search&st=uniqueid&q=*",
+		"*://sourcebans.fakaheda.eu/*",
 		"https://api.steampowered.com/*"
 	],
 	"optional_permissions": [
@@ -46,7 +47,7 @@
 	}
 	],
 	"background": {
-		"scripts": ["sites_config.js", "options.js", "background.js", "contextmenus.js"],
+		"scripts": ["sites_config.js", "background.js", "contextmenus.js"],
 		"persistent": false
 	},
 	"manifest_version": 2
