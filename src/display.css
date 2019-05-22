@@ -1,0 +1,87 @@
+.FTsteamIDcont {
+	display: inline-flex;
+	color: black;
+	font-size: 13px;
+}
+.FTsteamIDcont > div {
+	display: inline-block;
+	background: rgba(50, 50, 50, 0.15);
+	padding: 0 5px;
+}
+.FTsteamIDcont > div.sourcebans_cont {
+	background: #E59191;
+}
+.FTsteamIDcont > div.hlstats_cont {
+	background: #B4CDEB;
+}
+.FTsteamIDcont img.utilityicon {
+	max-height: 1em;
+	max-width: 1em;
+	width: auto;
+	height: auto;
+	margin-bottom: -3px;
+}
+
+.FTsteamIDcont .sid {
+	font-weight: bold;
+	color: #000;
+}
+
+.FTsteamIDcont ul.banmenu {
+	background: #f0f0f0;
+	position: relative;
+	box-shadow: 0 0 5px rgba(50, 50, 50, 0.7);
+	margin: 0;
+}
+
+.FTsteamIDcont ul.banmenu li {
+	margin: 0;
+	padding: 3px 10px 3px 7px;
+	list-style-type: none;
+	cursor: pointer;
+}
+.FTsteamIDcont ul.banmenu li img {
+	max-height: 1em;
+	max-width: 1em;
+	width: auto;
+	height: auto;
+	margin-right: 7px;
+	margin-bottom: -2px;
+}
+.FTsteamIDcont ul.banmenu li:nth-child(odd) {
+	background: #e0e0e0;
+}
+.FTsteamIDcont ul.banmenu li:hover {
+	background: #ffe0e0;
+}
+.FTsteamIDcont ul.banmenu input[type=text] {
+	padding: 5px;
+	margin: 5px;
+}
+.FTsteamIDcont ul.banmenu .boxmsg {
+	width: 300px;
+}
+.FTsteamIDcont ul.banmenu .boxmsg .title {
+	display: block;
+	font-weight: bold;
+	padding: 5px;
+	border-bottom: 1px solid #aaa;
+}
+.FTsteamIDcont ul.banmenu .boxmsg .msg {
+ 	padding: 5px;
+ }
+.FTsteamIDcont ul.banmenu .boxmsg.error .msg {
+	background: #ffb3ba;
+	color: #000;
+}
+.FTsteamIDcont ul.banmenu .boxmsg.ok .msg {
+	background: #baffc9;
+}
+.FTsteamIDcont ul.banmenu .boxmsg.info .msg {
+	background: #bae1ff;
+}
+.FTsteamIDcont ul.banmenu .boxmsg iframe {
+	border: 0;
+	background: #fff;
+	width: 100%;
+}

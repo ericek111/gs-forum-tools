@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>GS.cz Forum Tools Settings</title>
+	<style>
+		#settingsBody {
+			padding: 0 1em 1em 1em;
+		}
+		#statusSaved {
+			visibility: hidden;
+		}
+		#saveButton {
+			text-align: center;
+		}
+	</style>
+</head>
+
+<body id="settingsBody">
+	Custom API key:
+	<input type="text" id="customapikey" size="35" /><br />
+	<a href="http://steamcommunity.com/dev/apikey" target="_blank">Get API Key here</a>
+	<br />
+	<div id="statusSaved">Options saved.</div>
+	<div id="saveButton">
+		<button id="save">Save</button>
+	</div>
+	<script src="options.js"></script>
+</body>
+
+</html>
