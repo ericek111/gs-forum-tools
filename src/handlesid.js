@@ -1,19 +1,34 @@
-makeHLstatsLink = (base, sid) => {
+const makeHLstatsLink = (base, sid) => {
 	return base + "?mode=search&st=uniqueid&q=" + sid + "#autoredirect";
 }
-makeSourceBansLink = (base, sid, commslist) => {
+const makeSourceBansLink = (base, sid, commslist) => {
 	return base + "?p=" + (commslist ? "commslist" : "banlist") + "&searchText=" + sid;
 }
-
-serializeSBRequest = (verb, args) => {
+const serializeSBRequest = (verb, args) => {
 	var data = `xajax=${verb}&xajaxr=${new Date().getTime()}`;
 	for (let arg of args) {
 		data += "&xajaxargs[]=" + encodeURIComponent(arg);
 	}
 	return data;
 }
-
-renderSIDclickable = (sid) => {
+const banLengthToString = (m) => {
+	if (m == 0)
+		return '\u221e'; // infinity symbol
+	var days = Math.floor(m / (60*24));
+	m -= days * 60 * 24;
+	var hours = Math.floor(m / 60);
+	m -= hours * 60;
+	res = "";
+	var comp = [];
+	if (days > 0)
+		comp.push(days + " d");
+	if (hours > 0)
+		comp.push(hours + " h");
+	if (m > 0)
+		comp.push(m + " m");
+	return comp.join(' ');
+}
+const renderSIDclickable = (sid) => {
 	sid = sid.replace("STEAM_0", "STEAM_1");
 	// ID64 = 76561197960265728 + (B * 2) + A
     // ID3 = (B * 2) + A
@@ -71,7 +86,7 @@ renderSIDclickable = (sid) => {
 			if (iconuri) {
 				ret += `<img src="${chrome.runtime.getURL(iconuri)}" />`
 			}
-			ret += `${banEntry.reason.replace(/\s\/\sPP$/, '')}</li>\n`;
+			ret += `<span class="reason">${banEntry.reason.replace(/\s\/\sPP$/, '')}</span> <span class="time">(${banLengthToString(banEntry.time)})</span></li>\n`;
 		});
 		ret += `</ul></div>`;
 		ret += `
@@ -87,7 +102,7 @@ renderSIDclickable = (sid) => {
 	return ret;
 }
 
-handleSIDTextNode = (textNode) => {
+const handleSIDTextNode = (textNode) => {
 	let origText = textNode.textContent;
 	let newHtml = origText.replace(/STEAM_[0-5]:[01]:\d+/g, (a) => renderSIDclickable(a));
 
@@ -211,9 +226,7 @@ handleSIDTextNode = (textNode) => {
 	}
 }
 
-//Testing: Walk the DOM of the <body> handling all non-empty text nodes
 function processSIDsInDocument(topEl) {
-	//Create the TreeWalker
 	let treeWalker = document.createTreeWalker(topEl, NodeFilter.SHOW_TEXT, {
 		acceptNode: function(node) { 
 			if (node.textContent.length === 0
