@@ -66,7 +66,13 @@ const renderSIDclickable = (sid) => {
 					<ul class="banmenu" style="display: none">
 						<input type="text" placeholder="Player's nickname" name="playername" />`;
 		thisPage.section.banOrder.forEach((banEntry) => {
-			ret += `<li data-time='${banEntry.time}' data-type='${banEntry.type}' data-reason='${banEntry.reason}'>`;
+			let reason = banEntry.reason;
+			if (thisPage.forumSection && thisPage.forumSection.shortname) {
+				reason += " / " + thisPage.forumSection.shortname;
+			}
+
+			ret += `<li data-time='${banEntry.time}' data-type='${banEntry.type}' data-reason='${reason}'>`;
+
 			var iconuri = null;
 			if (banEntry.icon) {
 				iconuri = banEntry.icon;
@@ -156,7 +162,16 @@ const handleSIDTextNode = (textNode) => {
 			};
 			menu.querySelectorAll("li").forEach((el) => {
 				el.addEventListener("click", function(e) {
-					var { time, reason, type } = e.target.dataset;
+					var dataTarget = e.target;
+					while (dataTarget && dataTarget.nodeName != "LI") {
+						dataTarget = dataTarget.parentNode;
+					}
+
+					var { time, reason, type } = dataTarget.dataset;
+					if (!(time && reason && type)) {
+						alert("Chyba! Kontaktujte vývojára.");
+						throw Error("Invalid ban entry!");
+					}
 
 					var tosend;
 					if (type == SB_GAME) {
@@ -172,7 +187,7 @@ const handleSIDTextNode = (textNode) => {
 							"" // fromsub
 						]);
 					} else {
-						serializeSBRequest("AddBlock", [
+						tosend = serializeSBRequest("AddBlock", [
 							nickobj.value,
 							type,
 							sid,
@@ -193,7 +208,12 @@ const handleSIDTextNode = (textNode) => {
 
 						var parser = new DOMParser();
 						var xmlDoc = parser.parseFromString(data, "text/xml");
-						for (let el of xmlDoc.getElementsByTagName("xjx")[0].getElementsByTagName("cmd")) {
+						var xmlRoot = xmlDoc.getElementsByTagName("xjx");
+						if (xmlRoot.length < 1) {
+							alert("Chyba! Jsi přihlášen?");
+							return;
+						}
+						for (let el of xmlRoot[0].getElementsByTagName("cmd")) {
 							if (el.attributes.n.value != "js")
 								continue;
 							if (['ShowBox', 'ShowKickBox', 'ShowBlockBox'].filter((x) => el.innerHTML.startsWith(x)).length < 1)

@@ -3,6 +3,7 @@ let getThisPage = () => {
 		type: null,
 		site: null,
 		section: null,
+		forumSection: null,
 		forums: []
 	};
 
@@ -28,9 +29,11 @@ let getThisPage = () => {
 				res.site = site;
 			}
 			site.sections.forEach((section, sectionidx) => {
-				if (section.forumSections.filter(fid => res.forums.includes(fid)).length > 0) {
+				let matchingForumSections = section.forumSections.filter(sobj => res.forums.includes(sobj.fid));
+				if (matchingForumSections.length > 0) {
 					res.site = site;
 					res.section = section;
+					res.forumSection = matchingForumSections[0];
 				}
 			});
 		});
