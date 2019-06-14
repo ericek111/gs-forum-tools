@@ -117,131 +117,134 @@ const handleSIDTextNode = (textNode) => {
 		newSpan.innerHTML = newHtml;
 		newSpan.style.display = "inline-block";
 
-		var fttool = newSpan.querySelector("div.FTsteamIDcont");
-		var { sid, sid3 } = fttool.dataset;
+		newSpan.querySelectorAll("div.FTsteamIDcont").forEach((fttool) => {
+			var { sid, sid3 } = fttool.dataset;
 
-		var banplayerbutton = newSpan.querySelector("a.utility.banplayer");
-		var menu = newSpan.querySelector("ul.banmenu");
-		if (banplayerbutton && menu) {
-			var nickobj = menu.querySelector("input[name=playername]");
-			banplayerbutton.addEventListener("click", function(e) {
-				if (menu.style.display == "block")
-					menu.style.display = "none";
-				else 
-					menu.style.display = "block";
-				if (nickobj.value.length < 1) {
-					var sid64 = 76561197960265728n + BigInt(sid3);
-					chrome.runtime.sendMessage(chrome.runtime.id, {
-						action: 'Steam_API_Get',
-						verb: 'GetPlayerSummaries',
-						apikey: apikey,
-						batch: [sid64.toString()]
-					}, function(data, error) {
-						if (!error && data) {
-							nickobj.value = data.response.players[0].personaname;
-						}
-					});
-				}
-			}, false);
-			const ShowBox = function(title, msg, color, redir, noclose, append) { // ShowBox
-				if(color == "red")
-					color = "error";
-				else if(color == "blue")
-					color = "info";
-				else if(color == "green")
-					color = "ok";
-				else
-					color = "default";
-				menu.innerHTML = `
-					<div class="boxmsg ${color}">
-						<div class="title">${title}</div>
-						<div class="msg">${msg}</div>
-						${append || ""}
-					</div>
-				`;
-			};
-			menu.querySelectorAll("li").forEach((el) => {
-				el.addEventListener("click", function(e) {
-					var dataTarget = e.target;
-					while (dataTarget && dataTarget.nodeName != "LI") {
-						dataTarget = dataTarget.parentNode;
+			var banplayerbutton = fttool.querySelector("a.utility.banplayer");
+			var menu = fttool.querySelector("ul.banmenu");
+			if (banplayerbutton && menu) {
+				var nickobj = menu.querySelector("input[name=playername]");
+				banplayerbutton.addEventListener("click", function(e) {
+					if (menu.style.display == "block")
+						menu.style.display = "none";
+					else 
+						menu.style.display = "block";
+					if (nickobj.value.length < 1) {
+						var sid64 = 76561197960265728n + BigInt(sid3);
+						chrome.runtime.sendMessage(chrome.runtime.id, {
+							action: 'Steam_API_Get',
+							verb: 'GetPlayerSummaries',
+							apikey: apikey,
+							batch: [sid64.toString()]
+						}, function(data, error) {
+							if (!error && data) {
+								nickobj.value = data.response.players[0].personaname;
+							}
+						});
 					}
-
-					var { time, reason, type } = dataTarget.dataset;
-					if (!(time && reason && type)) {
-						alert("Chyba! Kontaktujte vývojára.");
-						throw Error("Invalid ban entry!");
-					}
-
-					var tosend;
-					if (type == SB_GAME) {
-						tosend = serializeSBRequest("AddBan", [
-							nickobj.value,
-							0,	// type - Steam ID ban
-							sid,
-							"", // ip
-							time,
-							0, // demo file
-							"", // demo file name
-							reason,
-							"" // fromsub
-						]);
-					} else {
-						tosend = serializeSBRequest("AddBlock", [
-							nickobj.value,
-							type,
-							sid,
-							time,
-							reason
-						]);
-					}
-
-					chrome.runtime.sendMessage(chrome.runtime.id, {
-						action: 'SBRequest',
-						sourcebans: thisPage.section.sourcebans,
-						data: tosend
-					}, function(data, error) {
-						if (error || !data) {
-							ShowBox("Request failed", error ? error : "Unknown error. (timed out?)", "red");
-							return;
+				}, false);
+				const ShowBox = function(title, msg, color, redir, noclose, append) { // ShowBox
+					if(color == "red")
+						color = "error";
+					else if(color == "blue")
+						color = "info";
+					else if(color == "green")
+						color = "ok";
+					else
+						color = "default";
+					menu.innerHTML = `
+						<div class="boxmsg ${color}">
+							<div class="title">${title}</div>
+							<div class="msg">${msg}</div>
+							${append || ""}
+						</div>
+					`;
+				};
+				menu.querySelectorAll("li").forEach((el) => {
+					el.addEventListener("click", function(e) {
+						var dataTarget = e.target;
+						while (dataTarget && dataTarget.nodeName != "LI") {
+							dataTarget = dataTarget.parentNode;
 						}
 
-						var parser = new DOMParser();
-						var xmlDoc = parser.parseFromString(data, "text/xml");
-						var xmlRoot = xmlDoc.getElementsByTagName("xjx");
-						if (xmlRoot.length < 1) {
-							alert("Chyba! Jsi přihlášen?");
-							return;
+						var { time, reason, type } = dataTarget.dataset;
+						if (!(time && reason && type)) {
+							alert("Chyba! Kontaktujte vývojára.");
+							throw Error("Invalid ban entry!");
 						}
-						for (let el of xmlRoot[0].getElementsByTagName("cmd")) {
-							if (el.attributes.n.value != "js")
-								continue;
-							if (['ShowBox', 'ShowKickBox', 'ShowBlockBox'].filter((x) => el.innerHTML.startsWith(x)).length < 1)
-								continue;
-							var sb_f = new Function('ShowBox', 'ShowKickBox', 'ShowBlockBox', el.innerHTML);
-							const ShowKickBox = function(check, type) {
-								ShowBox('Ban Added',
-										'The ban has been successfully added<br>',
-										'green',
-										'index.php?p=admin&c=bans',
-										true,
-										`<iframe src="${thisPage.section.sourcebans}/pages/admin.kickit.php?check=${check}&type=${type}"></iframe>`);
 
-							};
-							const ShowBlockBox = function(check, type, length) {
-								ShowBox('Block Added',
-										'The block has been successfully added<br>',
-										'green',
-										'index.php?p=admin&c=comms',
-										true,
-										`<iframe src="${thisPage.section.sourcebans}/pages/admin.blockit.php?check=${check}&type=${type}&length=${length}"></iframe>`);
-							};
-							sb_f(ShowBox, ShowKickBox, ShowBlockBox);
+						var tosend;
+						if (type == SB_GAME) {
+							tosend = serializeSBRequest("AddBan", [
+								nickobj.value,
+								0,	// type - Steam ID ban
+								sid,
+								"", // ip
+								time,
+								0, // demo file
+								"", // demo file name
+								reason,
+								"" // fromsub
+							]);
+						} else {
+							tosend = serializeSBRequest("AddBlock", [
+								nickobj.value,
+								type,
+								sid,
+								time,
+								reason
+							]);
 						}
+
+						chrome.runtime.sendMessage(chrome.runtime.id, {
+							action: 'SBRequest',
+							sourcebans: thisPage.section.sourcebans,
+							data: tosend
+						}, function(data, error) {
+							if (error || !data) {
+								ShowBox("Request failed", error ? error : "Unknown error. (timed out?)", "red");
+								return;
+							}
+
+							var parser = new DOMParser();
+							var xmlDoc = parser.parseFromString(data, "text/xml");
+							var xmlRoot = xmlDoc.getElementsByTagName("xjx");
+							if (xmlRoot.length < 1) {
+								alert("Chyba! Jsi přihlášen?");
+								return;
+							}
+							for (let el of xmlRoot[0].getElementsByTagName("cmd")) {
+								if (el.attributes.n.value != "js")
+									continue;
+								if (['ShowBox', 'ShowKickBox', 'ShowBlockBox'].filter((x) => el.innerHTML.startsWith(x)).length < 1)
+									continue;
+								var sb_f = new Function('ShowBox', 'ShowKickBox', 'ShowBlockBox', el.innerHTML);
+								const ShowKickBox = function(check, type) {
+									ShowBox('Ban Added',
+											'The ban has been successfully added<br>',
+											'green',
+											'index.php?p=admin&c=bans',
+											true,
+											`<iframe src="${thisPage.section.sourcebans}/pages/admin.kickit.php?check=${check}&type=${type}"></iframe>`);
+
+								};
+								const ShowBlockBox = function(check, type, length) {
+									ShowBox('Block Added',
+											'The block has been successfully added<br>',
+											'green',
+											'index.php?p=admin&c=comms',
+											true,
+											`<iframe src="${thisPage.section.sourcebans}/pages/admin.blockit.php?check=${check}&type=${type}&length=${length}"></iframe>`);
+								};
+								sb_f(ShowBox, ShowKickBox, ShowBlockBox);
+							}
+						});
 					});
 				});
-			});
-		}
+			}
+		});
+
+
 		textNode.parentNode.replaceChild(newSpan, textNode);
 	}
 }
