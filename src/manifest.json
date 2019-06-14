@@ -14,7 +14,8 @@
 		"*://www.gamesites.cz/*",
 		"*://hlstats.fakaheda.eu/hlxce_*/hlstats.php?mode=search&st=uniqueid&q=*",
 		"*://sourcebans.fakaheda.eu/*",
-		"https://api.steampowered.com/*"
+		"https://api.steampowered.com/*",
+		"https://psopf.cz/dema/*"
 	],
 	"optional_permissions": [
 		"notifications"
@@ -43,6 +44,14 @@
 		"run_at": "document_end",
 		"matches": [
 			"*://hlstats.fakaheda.eu/hlxce_*/hlstats.php?mode=search&st=uniqueid&q=*"
+		]
+	},
+	{
+		"js": [ "sites_config.js", "handlesid.js", "hlstats.js" ],
+		"css": [ "display.css" ],
+		"run_at": "document_idle",
+		"matches": [
+			"*://hlstats.fakaheda.eu/hlxce_*/*"
 		]
 	}
 	],

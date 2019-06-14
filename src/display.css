@@ -2,6 +2,7 @@
 	display: inline-flex;
 	color: black;
 	font-size: 13px;
+	min-height: 15px;
 }
 .FTsteamIDcont > div {
 	display: inline-block;
