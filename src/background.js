@@ -117,3 +117,15 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 	}
 	return true;
 });
+
+chrome.webRequest.onBeforeRequest.addListener(() => {
+		return { cancel: true };
+	}, {
+		urls: [
+			"*://banlist.gamesites.cz/csgo/*/themes/star/js/aos.js",
+			"*://banlist.gamesites.cz/csgo/*/themes/star/css/aos.css",
+			"*://banlist.gamesites.cz/csgo/*/themes/star/js/countTo.js"
+		],
+		types: ["script", "stylesheet"]
+	}, ["blocking"]
+);

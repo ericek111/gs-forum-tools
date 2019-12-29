@@ -1,13 +1,19 @@
 .FTsteamIDcont {
 	display: inline-flex;
+	font-family: sans-serif;
 	color: black;
 	font-size: 13px;
 	min-height: 15px;
+	margin: 0;
+	padding: 0;
+	line-height: 1.4em;
 }
 .FTsteamIDcont > div {
 	display: inline-block;
 	background: rgba(50, 50, 50, 0.15);
 	padding: 0 5px;
+	margin: 0;
+	line-height: 1.4em;
 }
 .FTsteamIDcont > div.sourcebans_cont {
 	background: #E59191;
@@ -15,25 +21,36 @@
 .FTsteamIDcont > div.hlstats_cont {
 	background: #B4CDEB;
 }
+.FTsteamIDcont a.utility {
+	height: 100%;
+	display: inline-flex;
+	vertical-align: middle;
+	align-items: center;
+}
 .FTsteamIDcont img.utilityicon {
 	max-height: 1em;
 	max-width: 1em;
 	width: auto;
 	height: auto;
-	margin-bottom: -3px;
+	display: block;
 }
+.FTsteamIDcont a.utility.clipboard { cursor: pointer; }
 
 .FTsteamIDcont .sid {
 	font-weight: bold;
 	color: #000;
 }
-
+.FTsteamIDcont .banmenucont {
+	position: absolute;
+}
 .FTsteamIDcont ul.banmenu {
 	background: #f0f0f0;
 	position: relative;
 	box-shadow: 0 0 5px rgba(50, 50, 50, 0.7);
 	margin: 0;
+	padding: 0;
 	font-weight: normal;
+	font-size: inherit;
 }
 
 .FTsteamIDcont ul.banmenu li {
@@ -41,6 +58,8 @@
 	padding: 3px 10px 3px 7px;
 	list-style-type: none;
 	cursor: pointer;
+	font-size: inherit;
+	line-height: 1.4;
 }
 .FTsteamIDcont ul.banmenu li .reason {
 }

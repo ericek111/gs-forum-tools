@@ -40,8 +40,10 @@ const renderSIDclickable = (sid) => {
 		<div class="FTsteamIDcont" data-sid="${sid}" data-sid3="${sid3}">
 			<div>
 				<span class="sid">${sid}</span>
-				<a onclick="navigator.clipboard.writeText('${sid}')"><img class="utilityicon" src="${chrome.runtime.getURL("icons/clipboard.png")}" /></a>
-				<a href="https://steamcommunity.com/profiles/[U:1:${sid3}]" target="_blank">
+				<a class="utility clipboard" onclick="navigator.clipboard.writeText('${sid}')">
+					<img class="utilityicon" src="${chrome.runtime.getURL("icons/clipboard.png")}" />
+				</a>
+				<a class="utility steamlink" href="https://steamcommunity.com/profiles/[U:1:${sid3}]" target="_blank">
 					<img class="utilityicon" src="${chrome.runtime.getURL("icons/steam.png")}" />
 				</a>
 			</div>`;
@@ -62,7 +64,7 @@ const renderSIDclickable = (sid) => {
 					<img class="utilityicon" src="${chrome.runtime.getURL("icons/sourcebans_chat.png")}" />
 				</a>`;
 	if (thisPage.section && thisPage.section.banOrder) {
-		ret += `<div style="position:absolute">
+		ret += `<div class="banmenucont">
 					<ul class="banmenu" style="display: none">
 						<input type="text" placeholder="Player's nickname" name="playername" />`;
 		thisPage.section.banOrder.forEach((banEntry) => {

@@ -1,0 +1,140 @@
+.btn.btn-inverse-light { border-color: transparent !important; }
+.table th, .table td,
+.tbl-sm th, .tbl-sm td {
+	
+}
+
+/* Bulk action support */
+#banlist > table:not(.table-striped) > thead > tr > th:first-child:not([width]):not(.text-center),
+#banlist > table:not(.table-striped) > tbody > tr[data-toggle='collapse'] > td:first-child,
+#tickswitchlink,
+#tickswitchlink2,
+#bulk_action {
+	display: none !important;
+}
+
+.grid-margin, .purchace-popup > div {
+	margin-bottom: 10px !important;
+}
+h4.lead + p {
+	float: right;
+	margin-top: -30px;
+}
+h4.lead + p + div.row {
+	margin-bottom: -50px;
+	margin-top: -50px;
+}
+.row.purchace-popup p {
+	font-size: 24px;
+}
+.card-statistics .card-body {
+	padding: 0.8rem 1.81rem 0.4rem 1.81rem !important;
+}
+
+/* Copyright info */
+div[style='margin-top: 3px; font-size:7pt'] {
+	display: none !important
+}
+#banlist > table > tbody > tr > td:not(:first-child) {
+	padding: 2px 20px !important;
+}
+.btn.btn-rounded {
+	border-radius: 0 !important;
+	padding: 5px 15px !important;
+	width: auto !important;
+	height: auto !important;
+	line-height: 1.4 !important;
+	margin-left: 5px;
+}
+
+#banlist > table td table td {
+	padding: 8px 20px !important;
+}
+#banlist > table {
+	max-width: 1170px;
+    margin: 0 auto;
+}
+#banlist > table > thead > tr > th:nth-child(1) {
+	width: 0 !important;
+	white-space: nowrap;
+}
+
+#banlist > table .badge {
+	font-size: 1em;
+	background: transparent;
+	border: none;
+}
+#banlist > table .badge-success { color: #080; }
+#banlist > table .badge-warning { color: #000; }
+
+/* Top navbar */
+nav .nav-item.dropdown .navbar-dropdown, .navbar-nav .nav-item.dropdown .navbar-dropdown {
+	position: relative !important;
+	top: auto !important;
+	right: auto !important;
+	left: auto !important;
+	min-width: 0 !important;
+	overflow: visible !important;
+	margin: 0 !important;
+	padding: 0 !important;
+	box-shadow: none !important;
+	border: none !important;
+	border-radius: none !important;
+	display: inline-block !important;
+	background: none !important;
+}
+.navbar-nav {
+    position: relative !important;
+    display: inline-block !important;
+}
+.navbar.default-layout .navbar-menu-wrapper .navbar-nav .nav-item:nth-child(2) {
+	display: none !important
+}
+
+.navbar.default-layout .navbar-menu-wrapper .navbar-nav .nav-item {
+	margin: 0 !important;
+}
+
+.navbar-nav .nav-item.dropdown .navbar-dropdown .dropdown-divider,
+.navbar-nav .nav-item.dropdown .navbar-dropdown .dropdown-item:not(.preview-item),
+#notificationDropdown {
+	display: none !important;
+}
+.dropdown-item:hover,
+.dropdown-item:focus {
+	background: none !important;
+}
+.preview-item-content input.form-control {
+	margin-top: 0 !important;
+}
+.form-control::placeholder {
+	color: #333 !important;
+}
+
+#banform, #commform {
+	display: inline-block;
+}
+.content-wrapper {
+	padding: 10px 0 10px 0 !important;
+}
+#breadcrumb {
+	display: none !important;
+}
+#admin-page-content #banlist > table > tbody > tr:not([data-toggle]) > td {
+	padding: 0 !important
+}
+
+/* Pop-up dialog box - unmute, unban */
+#dialog-placement .dialog-body .icon-info {
+	display: none;
+}
+#dialog-placement {
+	padding: 20px !important;
+}
+#dialog-placement .dialog-body #dialog-content-text {
+	width: 100% !important;
+}
+#dialog-placement .dialog-body #dialog-content-text textarea {
+	margin-top: 0.5em !important;
+	font-size: 1.4em !important;
+}
