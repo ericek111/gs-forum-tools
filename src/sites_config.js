@@ -13,7 +13,7 @@ const sites_config = {
 			sections: [
 				{
 					name: "JailBreak",
-					sourcebans: "https://www.gamesites.cz/serversoubory/ostatni/csgoblnew2/",
+					sourcebans: "https://banlist.gamesites.cz/csgo/jb/",
 					hlstats: "http://hlstats.fakaheda.eu/hlxce_186497/hlstats.php",
 					forumSections: [
 						{ fid: 954, shortname: "PP" },
@@ -31,7 +31,6 @@ const sites_config = {
 						{ ip: "81.0.217.175:27988", demos: "https://psopf.cz/dema/index.php?server=JailBreak4" },
 						{ ip: "217.11.249.78:27883", demos: "https://psopf.cz/dema/index.php?server=JailBreak5" },
 						{ ip: "217.11.249.79:27817", demos: "https://psopf.cz/dema/index.php?server=JailBreak6" },
-						{ ip: "82.208.17.105:27466", demos: "https://psopf.cz/dema/index.php?server=JailBreak7" },
 						{ ip: "82.208.17.102:27299", demos: "https://psopf.cz/dema/index.php?server=JailBreak8" },
 						{ ip: "217.11.249.93:27896", demos: "https://psopf.cz/dema/index.php?server=JailBreak9" }
 					],
@@ -49,7 +48,7 @@ const sites_config = {
 				},
 				{
 					name: "ALL",
-					sourcebans: "https://www.gamesites.cz/serversoubory/ostatni/csgoblnew1/",
+					sourcebans: "https://banlist.gamesites.cz/csgo/aim/",
 					hlstats: "http://hlstats.fakaheda.eu/hlxce_187068/hlstats.php",
 					forumSections: [
 						{ fid: 976, shortname: "PP" }
@@ -60,7 +59,8 @@ const sites_config = {
 						{ ip: "81.0.217.178:27080", demos: "https://psopf.cz/dema/index.php?server=Public" },
 						{ ip: "82.208.17.50:27378", demos: "https://psopf.cz/dema/index.php?server=Retakes" },
 						{ ip: "217.11.249.79:27793", demos: "https://psopf.cz/dema/index.php?server=SniperWar" },
-						{ ip: "82.208.17.109:27273", demos: "https://psopf.cz/dema/index.php?server=SniperWar2" }
+						{ ip: "82.208.17.109:27273", demos: "https://psopf.cz/dema/index.php?server=SniperWar2" },
+						{ ip: "82.208.17.105:27466", demos: "https://psopf.cz/dema/index.php?server=JailBreak7" }
 					],
 					banOrder: [
 						{ reason: "Nadávky velké", time: 720, type: SB_CHAT_AND_VOICE },
@@ -73,7 +73,7 @@ const sites_config = {
 				},
 				{
 					name: "Jump",
-					sourcebans: "https://www.gamesites.cz/serversoubory/ostatni/csgoblnew1/",
+					sourcebans: "https://banlist.gamesites.cz/csgo/jump/",
 					hlstats: "http://hlstats.fakaheda.eu/hlxce_189275/hlstats.php",
 					forumSections: [
 						{ fid: 992, shortname: "PP" }
@@ -92,7 +92,7 @@ const sites_config = {
 				},
 				{
 					name: "TTT",
-					sourcebans: "http://sourcebans.fakaheda.eu/sbans_249095/",
+					sourcebans: "https://banlist.gamesites.cz/csgo/ttt/",
 					hlstats: "http://hlstats.fakaheda.eu/hlxce_205007/hlstats.php",
 					forumSections: [
 						{ fid: 1105, shortname: "PP" }
