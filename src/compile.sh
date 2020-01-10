@@ -17,6 +17,7 @@ cp *.js temp;
 echo "Moving all other files into temp folder...";
 cp -a icons temp/icons;
 cp display.css temp;
+cp banlist.css temp;
 cp options.html temp;
 cp manifest.json temp;
 

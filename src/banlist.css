@@ -6,13 +6,13 @@
 
 /* Bulk action support */
 #banlist > table:not(.table-striped) > thead > tr > th:first-child:not([width]):not(.text-center),
-#banlist > table:not(.table-striped) > tbody > tr[data-toggle='collapse'] > td:first-child:not(.fix_icons),
+#banlist > table:not(.table-striped) > tbody > tr[data-toggle='collapse'] > td:first-child:not(.img-ss),
 #tickswitchlink,
 #tickswitchlink2,
 #bulk_action {
 	display: none !important;
 }
-#banlist > table > tbody > tr > td.fix_icons {
+#banlist > table > tbody > tr > td.img-ss {
 	padding: 2px 20px !important;
 }
 .grid-margin, .purchace-popup > div {
