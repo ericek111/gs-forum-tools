@@ -17,7 +17,8 @@ const sites_config = {
 					hlstats: "http://hlstats.fakaheda.eu/hlxce_186497/hlstats.php",
 					forumSections: [
 						{ fid: 954, shortname: "PP" },
-						{ fid: 1014, shortname: "AA" }
+						{ fid: 1014, shortname: "AA" },
+						{ fid: 983, shortname: "Aka" }
 					],
 					banIcons: new Map([
 						[SB_VOICE, "icons/sourcebans_team.png"],
