@@ -26,14 +26,14 @@ const sites_config = {
 						[SB_CHAT_AND_VOICE, "icons/sourcebans_chat.png"]
 					]),
 					servers: [
-						{ ip: "217.11.249.84:27361", demos: "https://psopf.cz/dema/index.php?server=JailBreak1" },
-						{ ip: "217.11.249.84:27583", demos: "https://psopf.cz/dema/index.php?server=JailBreak2" },
-						{ ip: "217.11.249.79:27422", demos: "https://psopf.cz/dema/index.php?server=JailBreak3" },
-						{ ip: "81.0.217.175:27988", demos: "https://psopf.cz/dema/index.php?server=JailBreak4" },
-						{ ip: "217.11.249.78:27883", demos: "https://psopf.cz/dema/index.php?server=JailBreak5" },
-						{ ip: "217.11.249.79:27817", demos: "https://psopf.cz/dema/index.php?server=JailBreak6" },
-						{ ip: "82.208.17.102:27299", demos: "https://psopf.cz/dema/index.php?server=JailBreak8" },
-						{ ip: "217.11.249.93:27896", demos: "https://psopf.cz/dema/index.php?server=JailBreak9" }
+						{ ip: "217.11.249.84:27361", demos: "https://dwandy.sdilej.eu/dema/index.php?server=JailBreak1" },
+						{ ip: "217.11.249.84:27583", demos: "https://dwandy.sdilej.eu/dema/index.php?server=JailBreak2" },
+						{ ip: "217.11.249.79:27422", demos: "https://dwandy.sdilej.eu/dema/index.php?server=JailBreak3" },
+						{ ip: "81.0.217.175:27988", demos: "https://dwandy.sdilej.eu/dema/index.php?server=JailBreak4" },
+						{ ip: "217.11.249.78:27883", demos: "https://dwandy.sdilej.eu/dema/index.php?server=JailBreak5" },
+						{ ip: "217.11.249.79:27817", demos: "https://dwandy.sdilej.eu/dema/index.php?server=JailBreak6" },
+						{ ip: "82.208.17.102:27299", demos: "https://dwandy.sdilej.eu/dema/index.php?server=JailBreak8" },
+						{ ip: "217.11.249.93:27896", demos: "https://dwandy.sdilej.eu/dema/index.php?server=JailBreak9" }
 					],
 					banOrder: [
 						{ reason: "FreeKill", time: 240, type: SB_VOICE },
@@ -55,13 +55,13 @@ const sites_config = {
 						{ fid: 976, shortname: "PP" }
 					],
 					servers: [
-						{ ip: "82.208.17.50:27933", demos: "https://psopf.cz/dema/index.php?server=1v1Arena" },
-						{ ip: "82.208.17.101:27575", demos: "https://psopf.cz/dema/index.php?server=1v1Arena2" },
-						{ ip: "81.0.217.178:27080", demos: "https://psopf.cz/dema/index.php?server=Public" },
-						{ ip: "82.208.17.50:27378", demos: "https://psopf.cz/dema/index.php?server=Retakes" },
-						{ ip: "217.11.249.79:27793", demos: "https://psopf.cz/dema/index.php?server=SniperWar" },
-						{ ip: "82.208.17.109:27273", demos: "https://psopf.cz/dema/index.php?server=SniperWar2" },
-						{ ip: "82.208.17.105:27466", demos: "https://psopf.cz/dema/index.php?server=JailBreak7" }
+						{ ip: "82.208.17.50:27933", demos: "https://dwandy.sdilej.eu/dema/index.php?server=1v1Arena" },
+						{ ip: "82.208.17.101:27575", demos: "https://dwandy.sdilej.eu/dema/index.php?server=1v1Arena2" },
+						{ ip: "81.0.217.178:27080", demos: "https://dwandy.sdilej.eu/dema/index.php?server=Public" },
+						{ ip: "82.208.17.50:27378", demos: "https://dwandy.sdilej.eu/dema/index.php?server=Retakes" },
+						{ ip: "217.11.249.79:27793", demos: "https://dwandy.sdilej.eu/dema/index.php?server=SniperWar" },
+						{ ip: "82.208.17.109:27273", demos: "https://dwandy.sdilej.eu/dema/index.php?server=SniperWar2" },
+						{ ip: "82.208.17.105:27466", demos: "https://dwandy.sdilej.eu/dema/index.php?server=JailBreak7" }
 					],
 					banOrder: [
 						{ reason: "Nadávky velké", time: 720, type: SB_CHAT_AND_VOICE },
@@ -80,8 +80,8 @@ const sites_config = {
 						{ fid: 992, shortname: "PP" }
 					],
 					servers: [
-						{ ip: "82.208.17.102:27112", demos: "https://psopf.cz/dema/index.php?server=Surf" },
-						{ ip: "82.208.17.105:27597", demos: "https://psopf.cz/dema/index.php?server=SurfCombat" }
+						{ ip: "82.208.17.102:27112", demos: "https://dwandy.sdilej.eu/dema/index.php?server=Surf" },
+						{ ip: "82.208.17.105:27597", demos: "https://dwandy.sdilej.eu/dema/index.php?server=SurfCombat" }
 					],
 					banOrder: [
 						{ reason: "Nadávky velké", time: 720, type: SB_CHAT_AND_VOICE },
@@ -99,8 +99,8 @@ const sites_config = {
 						{ fid: 1105, shortname: "PP" }
 					],
 					servers: [
-						{ ip: "217.11.249.84:27482", demos: "https://psopf.cz/dema/index.php?server=TTT1" },
-						{ ip: "81.0.217.179:27976", demos: "https://psopf.cz/dema/index.php?server=TTT2" }
+						{ ip: "217.11.249.84:27482", demos: "https://dwandy.sdilej.eu/dema/index.php?server=TTT1" },
+						{ ip: "81.0.217.179:27976", demos: "https://dwandy.sdilej.eu/dema/index.php?server=TTT2" }
 					],
 					banOrder: [
 						{ reason: "Nadávky velké", time: 720, type: SB_CHAT_AND_VOICE },
