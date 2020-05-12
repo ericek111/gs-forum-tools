@@ -1,4 +1,5 @@
 var gotvRecordsCache = [];
+var hlstatsServersCache = [];
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 	if (request.action == 'Steam_API_Get') {
 		fetch(`https://api.steampowered.com/ISteamUser/${request.verb}/v0002/?key=${request.apikey}&steamids=${request.batch.join(',')}`)
@@ -43,7 +44,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
 		var requestDate = new Date(request.date);
 		var cacheRow = gotvRecordsCache.find(el => el.gotvurl == request.gotvurl);
-		var shouldDown = cacheRow ? new Date() - cacheRow.cached > 1 * 60 * 1000 : true;
+		var shouldDown = cacheRow ? new Date() - cacheRow.cached > 2 * 60 * 1000 : true;
 		if (!cacheRow) {
 			cacheRow = {
 				gotvurl: request.gotvurl,
@@ -90,6 +91,12 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 				.catch(error => sendResponse(undefined, error));
 		}
 	} else if (request.action == 'GetServers') {
+		var cacheRow = hlstatsServersCache.find(el => el.url == request.hlstats);
+		if (cacheRow) {
+			sendResponse(cacheRow.ret);
+			return true;
+		}
+
 		fetch(request.hlstats)
 			.then(res => {
 				if (res.ok) {
@@ -110,6 +117,12 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 						name: name
 					});
 				}
+
+				hlstatsServersCache.push({
+					url: request.hlstats,
+					ret: ret
+				});
+
 				return ret;
 			})
 			.then(data => sendResponse(data))
