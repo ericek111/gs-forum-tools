@@ -1,13 +1,12 @@
 {
 	"name": "GameSites.cz Forum Tools",
 	"description": "Nástroje pre zjednodušenie práce s portálom Gamesites.cz",
-	"version": "3.1",
+	"version": "3.1.1",
 	"icons": { "16": "icons/gs16.png",
 			"48": "icons/gs48.png",
 			"128": "icons/gs128.png" },
 	"permissions": [
 		"storage",
-		"alarms",
 		"contextMenus",
 		"activeTab",
 		"webRequest",
@@ -18,9 +17,6 @@
 		"*://sourcebans.fakaheda.eu/*",
 		"https://api.steampowered.com/*",
 		"https://dwandy.sdilej.eu/dema/*"
-	],
-	"optional_permissions": [
-		"notifications"
 	],
 	"options_ui": {
 		"page": "options.html",
