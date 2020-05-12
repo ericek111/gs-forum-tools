@@ -43,55 +43,59 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 		};
 
 		var requestDate = new Date(request.date);
-		var cacheRow = gotvRecordsCache.find(el => el.gotvurl == request.gotvurl);
-		var shouldDown = cacheRow ? new Date() - cacheRow.cached > 2 * 60 * 1000 : true;
-		if (!cacheRow) {
-			cacheRow = {
-				gotvurl: request.gotvurl,
-				cached: new Date(),
-				entries: []
-			};
+		var cacheRowIdx = gotvRecordsCache.findIndex(el => el.gotvurl == request.gotvurl);
+
+		var cacheRow = {
+			gotvurl: request.gotvurl,
+			cached: new Date(),
+			entries: []
+		};
+		if (cacheRowIdx !== -1) {
+			let oldRow = gotvRecordsCache[cacheRowIdx];
+			if (new Date() - oldRow.cached < 2 * 60 * 1000) {
+				return checkAndSendFeasible(oldRow, requestDate);
+			}
+
+			gotvRecordsCache[cacheRowIdx] = cacheRow;
+		} else {
 			gotvRecordsCache.push(cacheRow);
 		}
 
-		if (!shouldDown && checkAndSendFeasible(cacheRow, requestDate))
-			return;
+		fetch(request.gotvurl)
+			.then(res => {
+				if (res.ok) {
+					return res.text();
+				} else {
+					throw Error(`${res.status}: ${res.statusText}`);
+				}
+			})
+			.then(data => {
+				var ret = [];
+				var parser = new DOMParser();
+				var xmlDoc = parser.parseFromString(data, "text/html");
+				for (let gotvRow of xmlDoc.getElementById("dataTable").querySelector("tbody").querySelectorAll("tr")) {
+					let demoLink = gotvRow.children[2].querySelector("a").href;
+					if (cacheRow.entries.length > 0 && demoLink == cacheRow.entries[cacheRow.entries.length - 1].demo)
+						break;
 
-		if (shouldDown) {
-			fetch(request.gotvurl)
-				.then(res => {
-					if (res.ok) {
-						return res.text();
-					} else {
-						throw Error(`${res.status}: ${res.statusText}`);
-					}
-				})
-				.then(data => {
-					var ret = [];
-					var parser = new DOMParser();
-					var xmlDoc = parser.parseFromString(data, "text/html");
-					for (let gotvRow of xmlDoc.getElementById("dataTable").querySelector("tbody").querySelectorAll("tr")) {
-						let demoLink = gotvRow.children[2].querySelector("a").href;
-						if (cacheRow.entries.length > 0 && demoLink == cacheRow.entries[cacheRow.entries.length - 1].demo)
-							break;
+					let mapName = gotvRow.children[1].innerText;
+					let dateStrArr = gotvRow.children[0].innerText.split(" ");
+					let goodDateStr = dateStrArr[0].split(".").reverse().join('-') + 'T' + dateStrArr[1];
 
-						let mapName = gotvRow.children[1].innerText;
-						let dateStrArr = gotvRow.children[0].innerText.split(" ");
-						let goodDateStr = dateStrArr[0].split(".").reverse().join('-') + 'T' + dateStrArr[1];
+					cacheRow.entries.push({
+						date: new Date(goodDateStr),
+						map: mapName,
+						demo: demoLink
+					});
+				}
 
-						cacheRow.entries.push({
-							date: new Date(goodDateStr),
-							map: mapName,
-							demo: demoLink
-						});
-					}
-
-					checkAndSendFeasible(cacheRow, requestDate);
-				})
-				.catch(error => sendResponse(undefined, error));
-		}
+				checkAndSendFeasible(cacheRow, requestDate);
+			})
+			.catch(error => sendResponse(undefined, error));
 	} else if (request.action == 'GetServers') {
-		var cacheRow = hlstatsServersCache.find(el => el.url == request.hlstats);
+		var cacheRowIdx = hlstatsServersCache.findIndex(el => el.url == request.hlstats);
+		var cacheRow = hlstatsServersCache[cacheRowIdx];
+
 		if (cacheRow) {
 			sendResponse(cacheRow.ret);
 			return true;
