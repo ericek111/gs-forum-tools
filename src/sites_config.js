@@ -32,8 +32,8 @@ const sites_config = {
 						{ ip: "81.0.217.175:27988", demos: "https://dwandy.sdilej.eu/dema/index.php?server=JailBreak4" },
 						{ ip: "217.11.249.78:27883", demos: "https://dwandy.sdilej.eu/dema/index.php?server=JailBreak5" },
 						{ ip: "217.11.249.79:27817", demos: "https://dwandy.sdilej.eu/dema/index.php?server=JailBreak6" },
-						{ ip: "82.208.17.102:27299", demos: "https://dwandy.sdilej.eu/dema/index.php?server=JailBreak8" },
-						{ ip: "217.11.249.93:27896", demos: "https://dwandy.sdilej.eu/dema/index.php?server=JailBreak9" }
+						{ ip: "82.208.17.102:27299", demos: "https://dwandy.sdilej.eu/dema/index.php?server=JailBreak7" },
+						{ ip: "217.11.249.93:27896", demos: "https://dwandy.sdilej.eu/dema/index.php?server=JailBreak8" }
 					],
 					banOrder: [
 						{ reason: "FreeKill", time: 240, type: SB_VOICE },
@@ -57,11 +57,14 @@ const sites_config = {
 					servers: [
 						{ ip: "82.208.17.50:27933", demos: "https://dwandy.sdilej.eu/dema/index.php?server=1v1Arena" },
 						{ ip: "82.208.17.101:27575", demos: "https://dwandy.sdilej.eu/dema/index.php?server=1v1Arena2" },
+						{ ip: "82.208.17.105:27466", demos: "https://dwandy.sdilej.eu/dema/index.php?server=CTF" },
+						{ ip: "82.208.17.101:27355", demos: "https://dwandy.sdilej.eu/dema/index.php?server=Dust2" },
+						{ ip: "217.11.249.84:27473", demos: "https://dwandy.sdilej.eu/dema/index.php?server=MirageOnly" },
 						{ ip: "81.0.217.178:27080", demos: "https://dwandy.sdilej.eu/dema/index.php?server=Public" },
+						{ ip: "217.11.249.84:27173", demos: "https://dwandy.sdilej.eu/dema/index.php?server=PublicPrime" },
 						{ ip: "82.208.17.50:27378", demos: "https://dwandy.sdilej.eu/dema/index.php?server=Retakes" },
 						{ ip: "217.11.249.79:27793", demos: "https://dwandy.sdilej.eu/dema/index.php?server=SniperWar" },
-						{ ip: "82.208.17.109:27273", demos: "https://dwandy.sdilej.eu/dema/index.php?server=SniperWar2" },
-						{ ip: "82.208.17.105:27466", demos: "https://dwandy.sdilej.eu/dema/index.php?server=JailBreak7" }
+						{ ip: "82.208.17.109:27273", demos: "https://dwandy.sdilej.eu/dema/index.php?server=SniperWar2" }
 					],
 					banOrder: [
 						{ reason: "Nadávky velké", time: 720, type: SB_CHAT_AND_VOICE },
@@ -80,8 +83,11 @@ const sites_config = {
 						{ fid: 992, shortname: "PP" }
 					],
 					servers: [
+						{ ip: "82.208.17.101:27240", demos: "https://dwandy.sdilej.eu/dema/index.php?server=Bhop" },
+						{ ip: "82.208.17.49:27175", demos: "https://dwandy.sdilej.eu/dema/index.php?server=Minigames" },
 						{ ip: "82.208.17.102:27112", demos: "https://dwandy.sdilej.eu/dema/index.php?server=Surf" },
-						{ ip: "82.208.17.105:27597", demos: "https://dwandy.sdilej.eu/dema/index.php?server=SurfCombat" }
+						{ ip: "82.208.17.105:27597", demos: "https://dwandy.sdilej.eu/dema/index.php?server=SurfCombat" },
+						{ ip: "82.208.17.102:27112", demos: "https://dwandy.sdilej.eu/dema/index.php?server=SurfRPG" }
 					],
 					banOrder: [
 						{ reason: "Nadávky velké", time: 720, type: SB_CHAT_AND_VOICE },
