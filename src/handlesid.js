@@ -35,15 +35,16 @@ const renderSIDclickable = (sid) => {
     // ID32 = STEAM_0:A:B
 	var sidp = sid.match(/STEAM_1:([01]):(\d+)/);
 	var sid3 = parseInt(sidp[2], 10) * 2 + parseInt(sidp[1]);
+	var sid64 = 76561197960265728n + BigInt(sid3);
 
 	var ret = `
-		<div class="FTsteamIDcont" data-sid="${sid}" data-sid3="${sid3}">
+		<div class="FTsteamIDcont" data-sid="${sid}" data-sid3="${sid3}" data-sid64="${sid64}">
 			<div>
 				<span class="sid">${sid}</span>
 				<a class="utility clipboard" onclick="navigator.clipboard.writeText('${sid}')">
 					<img class="utilityicon" src="${chrome.runtime.getURL("icons/clipboard.png")}" />
 				</a>
-				<a class="utility steamlink" href="https://steamcommunity.com/profiles/[U:1:${sid3}]" target="_blank">
+				<a class="utility steamlink" href="https://steamcommunity.com/profiles/${sid64}" target="_blank">
 					<img class="utilityicon" src="${chrome.runtime.getURL("icons/steam.png")}" />
 				</a>
 			</div>`;
@@ -120,7 +121,7 @@ const handleSIDTextNode = (textNode) => {
 		newSpan.style.display = "inline-block";
 
 		newSpan.querySelectorAll("div.FTsteamIDcont").forEach((fttool) => {
-			var { sid, sid3 } = fttool.dataset;
+			var { sid, sid64 } = fttool.dataset;
 
 			var banplayerbutton = fttool.querySelector("a.utility.banplayer");
 			var menu = fttool.querySelector("ul.banmenu");
@@ -132,7 +133,6 @@ const handleSIDTextNode = (textNode) => {
 					else 
 						menu.style.display = "block";
 					if (nickobj.value.length < 1) {
-						var sid64 = 76561197960265728n + BigInt(sid3);
 						chrome.runtime.sendMessage(chrome.runtime.id, {
 							action: 'Steam_API_Get',
 							verb: 'GetPlayerSummaries',
