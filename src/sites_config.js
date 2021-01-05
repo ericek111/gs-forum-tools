@@ -57,14 +57,18 @@ const sites_config = {
 					servers: [
 						{ ip: "82.208.17.50:27933", demos: "https://dwandy.sdilej.eu/dema/index.php?server=1v1Arena" },
 						{ ip: "82.208.17.101:27575", demos: "https://dwandy.sdilej.eu/dema/index.php?server=1v1Arena2" },
-						{ ip: "82.208.17.105:27466", demos: "https://dwandy.sdilej.eu/dema/index.php?server=CTF" },
+						{ ip: "82.208.17.101:27372", demos: "https://dwandy.sdilej.eu/dema/index.php?server=1v1Arena3" },
+						{ ip: "217.11.249.79:27793", demos: "https://dwandy.sdilej.eu/dema/index.php?server=SniperWar" },
+						{ ip: "82.208.17.109:27273", demos: "https://dwandy.sdilej.eu/dema/index.php?server=SniperWar2" },
 						{ ip: "82.208.17.101:27355", demos: "https://dwandy.sdilej.eu/dema/index.php?server=Dust2" },
 						{ ip: "217.11.249.84:27473", demos: "https://dwandy.sdilej.eu/dema/index.php?server=MirageOnly" },
+						{ ip: "82.208.17.101:27062", demos: "https://dwandy.sdilej.eu/dema/index.php?server=MirageOnly2" },
 						{ ip: "81.0.217.178:27080", demos: "https://dwandy.sdilej.eu/dema/index.php?server=Public" },
-						{ ip: "217.11.249.84:27173", demos: "https://dwandy.sdilej.eu/dema/index.php?server=PublicPrime" },
+						{ ip: "217.11.249.84:27173", demos: "https://dwandy.sdilej.eu/dema/index.php?server=PublicExtra" },
+						{ ip: "82.208.17.49:27314", demos: "https://dwandy.sdilej.eu/dema/index.php?server=PistolWar" },
 						{ ip: "82.208.17.50:27378", demos: "https://dwandy.sdilej.eu/dema/index.php?server=Retakes" },
-						{ ip: "217.11.249.79:27793", demos: "https://dwandy.sdilej.eu/dema/index.php?server=SniperWar" },
-						{ ip: "82.208.17.109:27273", demos: "https://dwandy.sdilej.eu/dema/index.php?server=SniperWar2" }
+						{ ip: "82.208.17.105:27466", demos: "https://dwandy.sdilej.eu/dema/index.php?server=Retakes2" },
+
 					],
 					banOrder: [
 						{ reason: "Nadávky velké", time: 720, type: SB_CHAT_AND_VOICE },
@@ -87,7 +91,7 @@ const sites_config = {
 						{ ip: "82.208.17.49:27175", demos: "https://dwandy.sdilej.eu/dema/index.php?server=Minigames" },
 						{ ip: "82.208.17.102:27112", demos: "https://dwandy.sdilej.eu/dema/index.php?server=Surf" },
 						{ ip: "82.208.17.105:27597", demos: "https://dwandy.sdilej.eu/dema/index.php?server=SurfCombat" },
-						{ ip: "82.208.17.102:27112", demos: "https://dwandy.sdilej.eu/dema/index.php?server=SurfRPG" }
+						{ ip: "82.208.17.49:27774", demos: "https://dwandy.sdilej.eu/dema/index.php?server=SurfRPG" }
 					],
 					banOrder: [
 						{ reason: "Nadávky velké", time: 720, type: SB_CHAT_AND_VOICE },
