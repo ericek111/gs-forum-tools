@@ -16,6 +16,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 		fetch(request.sourcebans, {
 			method: 'POST',
 			cache: 'no-cache',
+			mode: 'no-cors',
 			headers: {
 				'Content-Type': 'application/x-www-form-urlencoded'
 			},
@@ -61,7 +62,9 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 			gotvRecordsCache.push(cacheRow);
 		}
 
-		fetch(request.gotvurl)
+		fetch(request.gotvurl, {
+			mode: 'no-cors'
+		})
 			.then(res => {
 				if (res.ok) {
 					return res.text();
@@ -101,7 +104,9 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 			return true;
 		}
 
-		fetch(request.hlstats)
+		fetch(request.hlstats, {
+			mode: 'no-cors'
+		})
 			.then(res => {
 				if (res.ok) {
 					return res.text();
