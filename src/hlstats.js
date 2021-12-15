@@ -30,7 +30,7 @@ const doRow = (tr) => {
 
 	let rowDate = new Date(tr.children[0].innerText);
 	let rowServer = tr.children[3].innerText;
-	let rowMap = tr.children[4].innerText.split('-')[0];
+	let rowMap = tr.children[4].innerText;
 
 	let rowServerEntry = thisPage.section.servers.find(el => el.name === rowServer);
 
