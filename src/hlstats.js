@@ -85,8 +85,12 @@ let doPlayerInfo = (tries) => {
 		setTimeout(doPlayerInfo.bind(null, (tries + 1) || 0), 200);
 		return;
 	}
-	var sidlink = sidfield.querySelector("a");
-	sidlink.outerHTML = `<span>${sidlink.innerText}</span>`;
+	
+	let sidlink = sidfield.querySelector("a");
+	let wrapper = document.createElement('span');
+	sidlink.before(wrapper);
+	wrapper.appendChild(sidlink);
+
 	processSIDsInDocument(sidfield);
 }
 let loadServerNames = (cb, section) => {

@@ -26,6 +26,7 @@
 	display: inline-flex;
 	vertical-align: middle;
 	align-items: center;
+	cursor: pointer;
 }
 .FTsteamIDcont img.utilityicon {
 	max-height: 1em;
@@ -44,6 +45,7 @@
 	position: absolute;
 }
 .FTsteamIDcont ul.banmenu {
+	display: none;
 	background: #f0f0f0;
 	position: relative;
 	box-shadow: 0 0 5px rgba(50, 50, 50, 0.7);
@@ -52,7 +54,9 @@
 	font-weight: normal;
 	font-size: inherit;
 }
-
+.FTsteamIDcont.banmenu-open ul.banmenu {
+	display: block;
+}
 .FTsteamIDcont ul.banmenu li {
 	margin: 0;
 	padding: 3px 10px 3px 7px;

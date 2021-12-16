@@ -36,7 +36,7 @@ let doPage = () => {
 
 	let counts = document.querySelectorAll('.count-number');
 	for (let c of counts) {
-		c.innerHTML = c.dataset.to;
+		c.textContent = c.dataset.to;
 	}
 }
 
