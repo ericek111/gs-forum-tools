@@ -45,7 +45,7 @@
 			]
 		},
 		{
-			"js": [ "sites_config.js", "handlesid.js", "hlstats.js" ],
+			"js": [ "sites_config.js", "options.js", "steamapikey.js", "handlesid.js", "hlstats.js" ],
 			"css": [ "display.css" ],
 			"run_at": "document_idle",
 			"matches": [
