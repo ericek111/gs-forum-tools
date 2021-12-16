@@ -26,7 +26,7 @@ cd temp;
 zip -r "../ForumTools_Chrome_${VERSION}.zip" .;
 
 echo "Adding extra lines into manifest file needed for Firefox...";
-firefox_specific_bits='\  \"applications\": {\n\    \"gecko\": {\n\      \"id\": \"erik.brocko@letemsvetemapplem.eu\",\n\      \"strict_min_version\": \"55.0\"\n\    }\n\  },';
+firefox_specific_bits='\  \"applications\": {\n\    \"gecko\": {\n\      \"id\": \"erik.brocko@letemsvetemapplem.eu\",\n\      \"strict_min_version\": \"57.0\"\n\    }\n\  },';
 sed -i "/\"manifest_version\": 2/i $firefox_specific_bits" manifest.json;
 
 echo "Moving everything into ForumTools_Firefox_${VERSION}.zip...";
