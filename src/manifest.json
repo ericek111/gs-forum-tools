@@ -1,7 +1,7 @@
 {
 	"name": "GameSites.cz Forum Tools",
 	"description": "Nástroje pre zjednodušenie práce s portálom Gamesites.cz",
-	"version": "3.6",
+	"version": "3.7",
 	"icons": { "16": "icons/gs16.png",
 			"48": "icons/gs48.png",
 			"128": "icons/gs128.png" },
@@ -58,6 +58,14 @@
 			"run_at": "document_idle",
 			"matches": [
 				"*://banlist.gamesites.cz/csgo/*"
+			]
+		},
+		{
+			"js": [ "serverlist_join.js" ],
+			"run_at": "document_idle",
+			"matches": [
+				"*://www.gamesites.cz/servery/cs-go/",
+				"*://www.gamesites.cz/servery/cs-1-6/"
 			]
 		}
 	],
