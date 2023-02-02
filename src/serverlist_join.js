@@ -31,8 +31,9 @@
 	joinButtonTempl.appendChild(joinLinkTempl);
 
 	for (const ipRow of ipRows) {
+		joinLinkTempl.href = 'steam://connect/' + ipRow.innerText.trim();
+		
 		const joinServerDiv = joinButtonTempl.cloneNode(true);
-		joinButtonTempl.firstChild.href = 'steam://connect/' + ipRow.innerText.trim();
 		ipRow.insertAdjacentElement('afterend', joinServerDiv);
 	}
 })();
