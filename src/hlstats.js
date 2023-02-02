@@ -45,7 +45,9 @@ const doRow = (tr) => {
 		var link = rowServerEntry.demos;
 		var img = chrome.runtime.getURL("icons/clock.svg");
 
-		if (!error && data && data.map == rowMap && Math.abs(rowDate - new Date(data.date)) < 180 * 60 * 1000) {
+		// For cases where the map name is left empty in HLstats, try to match using date and server name only.
+		// A difference of more than 3 hours is unlikely (and there'd be something wrong with it).
+		if (!error && data && (data.map == rowMap || rowMap.length === 0) && Math.abs(rowDate - new Date(data.date)) < 180 * 60 * 1000) {
 			link = data.demo;
 			img = chrome.runtime.getURL("icons/download.png");
 		}
