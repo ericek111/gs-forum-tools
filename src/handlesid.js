@@ -208,12 +208,15 @@ const addListenersToWidget = fttool => {
 		if (!li)
 			return;
 
-		const { time, reason, type } = li.dataset;
+		let { time, reason, type } = li.dataset;
 		if (!(time && reason && type)) {
 			alert("Chyba! Kontaktujte vývojára.");
 			throw Error("Invalid ban entry!");
 		}
+		type = parseInt(type);
 
+		const ppUrl = fttool.closest('.post .postbody')?.querySelector(':scope > .author > a:first-child')?.href || '';
+		
 		let tosend;
 		if (type === SB_GAME) {
 			tosend = serializeSBRequest("AddBan", [
@@ -225,7 +228,8 @@ const addListenersToWidget = fttool => {
 				0, // demo file
 				"", // demo file name
 				reason,
-				"" // fromsub
+				"", // fromsub
+				ppUrl,
 			]);
 		} else {
 			tosend = serializeSBRequest("AddBlock", [
@@ -233,7 +237,8 @@ const addListenersToWidget = fttool => {
 				type,
 				sid,
 				time,
-				reason
+				reason,
+				ppUrl
 			]);
 		}
 
