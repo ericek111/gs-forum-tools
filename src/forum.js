@@ -60,7 +60,66 @@ const doTopic = () => {
 	}
 }
 
+const doTopicHighlighting = () => {
+	if(!thisPage.forumSection)
+		return;
+		
+	if(thisPage.forumSection.fid == 954) {
+		topics = document.querySelectorAll(".topiclist.topics")[1].children;
+		for(var i = 0; i < topics.length; i++) {
+			highlightTopic(topics[i]);
+		}
+
+	} else if(thisPage.forumSection.shortname = "PP") {
+		topics = document.querySelectorAll(".topiclist.topics")[1].children;
+		for(var i = 0; i < topics.length; i++) {
+			highlightTopic(topics[i]);
+		}
+	}
+}
+
+const highlightTopic = (topic) => {
+	let title = topic.querySelector(".topictitle");
+	let status = 0;
+	if(title.innerHTML.includes("[Vyřešeno]")) status = 1;
+	else if(title.innerHTML.includes("[V]")) status = 1;
+	else if(title.innerHTML.includes("[Nedostatečné]")) status = 2;
+	else if(title.innerHTML.includes("[N]")) status = 2;
+	else if(title.innerHTML.includes("[Čeká se]")) status = 3;
+	else if(title.innerHTML.includes("[Mimo vzor]")) status = 4;
+	else if(title.innerHTML.includes("[Duplicita]")) status = 5;
+	else if(title.innerHTML.includes("[Neřešitelné]")) status = 6;
+	else if(title.innerHTML.includes("[Čekání na CHH]")) status = 7;
+	else if(title.innerHTML.includes("[CHH]")) status = 7;
+	else if(title.innerHTML.includes("[BPR]")) status = 8;
+	title.innerHTML = title.innerHTML.replace(/\[[a-zA-ZáčďéíňóřšťůúýžÁČĎÉÍŇÓŘŠŤŮÚÝŽ\s]*\]\s?/i, "");
+
+	var el = document.createElement("span");
+
+	if(status == 1) {
+		el.innerHTML = `<span style="background-color: #3dca3d;border-radius: 3px;padding: 2px 5px 2px 5px;color: white;">Vyřešeno</span>&nbsp;`;
+	} else if(status == 2) {
+		el.innerHTML = `<span style="background-color: #ef3d3d;border-radius: 3px;padding: 2px 5px 2px 5px;color: white;">Nedostatečné</span>&nbsp;`;
+	} else if(status == 3) {
+		el.innerHTML = `<span style="background-color: #5a9afb;border-radius: 3px;padding: 2px 5px 2px 5px;color: white;">Čeká se</span>&nbsp;`;
+	} else if(status == 4) {
+		el.innerHTML = `<span style="background-color: #ef3d3d;border-radius: 3px;padding: 2px 5px 2px 5px;color: white;">Mimo vzor</span>&nbsp;`;
+	} else if(status == 5) {
+		el.innerHTML = `<span style="background-color: #5f5f5f;border-radius: 3px;padding: 2px 5px 2px 5px;color: white;">Duplicita</span>&nbsp;`;
+	} else if(status == 6) {
+		el.innerHTML = `<span style="background-color: #5f5f5f;border-radius: 3px;padding: 2px 5px 2px 5px;color: white;">Neřešitelné</span>&nbsp;`;
+	} else if(status == 7) {
+		el.innerHTML = `<span style="background-color: #5a9afb;border-radius: 3px;padding: 2px 5px 2px 5px;color: white;">Čekání na CHH</span>&nbsp;`;
+	} else if(status == 8) {
+		el.innerHTML = `<span style="padding: 2px 5px 2px 5px;color: #24ff70;transform: skewY(-11deg);display: inline-block;font-weight: bold;text-decoration: underline;background-image: linear-gradient(to right, #ff6ff4 , #ff0023);margin-top: 12px;margin-bottom: 10px;">POSRAL TO!</span>&nbsp;`;
+ 	}
+
+	title.before(el);
+}
+
 const thisPage = getThisPage();
 if (thisPage.type == "topic") {
 	doTopic();
+} else if (thisPage.type == "forum") {
+	doTopicHighlighting();
 }

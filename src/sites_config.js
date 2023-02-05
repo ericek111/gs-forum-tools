@@ -37,15 +37,21 @@ const sites_config = {
 						{ ip: "217.11.249.93:27896", demos: "https://csgo.gamesites.cz/dema/index.php?server=JailBreak8" }
 					],
 					banOrder: [
-						{ reason: "FreeKill", time: 240, type: SB_VOICE },
+						{ reason: "MultiFreekill", time: 2880, type: SB_VOICE },
 						{ reason: "Neschopnost CT", time: 1440, type: SB_VOICE },
-						{ reason: "Úmyslné kažení hry", time: 1440, type: SB_VOICE },
 						{ reason: "Nadržování", time: 1440, type: SB_VOICE },
-						{ reason: "MultiFreeKill", time: 2880, type: SB_VOICE },
+						{ reason: "Úmyslné kažení hry", time: 1440, type: SB_VOICE },
+						{ reason: "Házení gun T", time: 1440, type: SB_VOICE },
+						{ reason: "Freekill", time: 240, type: SB_VOICE },
+						{ reason: "Nadávky střední", time: 120, type: SB_CHAT },
 						{ reason: "Nadávky velké", time: 720, type: SB_CHAT },
 						{ reason: "Nadávky neúnosné", time: 2880, type: SB_CHAT },
-						{ reason: "BunnyHop", time: 10080, type: SB_GAME },
-						{ reason: "MultiHack", time: 0, type: SB_GAME }
+						{ reason: "Opakovaný spam", time: 720, type: SB_CHAT },
+						{ reason: "Ghosting", time: 1440, type: SB_GAME },
+						{ reason: "BunnyHop script", time: 10080, type: SB_GAME },
+						{ reason: "MultiHack", time: 0, type: SB_GAME },
+						{ reason: "WallHack", time: 0, type: SB_GAME },
+						{ reason: "AimBot", time: 0, type: SB_GAME }
 					]
 				},
 				{
@@ -72,9 +78,10 @@ const sites_config = {
 
 					],
 					banOrder: [
+						{ reason: "Nadávky střední", time: 120, type: SB_CHAT_AND_VOICE },
 						{ reason: "Nadávky velké", time: 720, type: SB_CHAT_AND_VOICE },
 						{ reason: "Nadávky neúnosné", time: 2880, type: SB_CHAT_AND_VOICE },
-						{ reason: "BunnyHop", time: 10080, type: SB_GAME },
+						{ reason: "BunnyHop script", time: 10080, type: SB_GAME },
 						{ reason: "WallHack", time: 0, type: SB_GAME },
 						{ reason: "AimBot", time: 0, type: SB_GAME },
 						{ reason: "MultiHack", time: 0, type: SB_GAME }
@@ -95,6 +102,7 @@ const sites_config = {
 						{ ip: "82.208.17.49:27774", demos: "https://csgo.gamesites.cz/dema/index.php?server=SurfRPG" }
 					],
 					banOrder: [
+						{ reason: "Nadávky střední", time: 120, type: SB_CHAT_AND_VOICE },
 						{ reason: "Nadávky velké", time: 720, type: SB_CHAT_AND_VOICE },
 						{ reason: "Nadávky neúnosné", time: 2880, type: SB_CHAT_AND_VOICE },
 						{ reason: "WallHack", time: 0, type: SB_GAME },
@@ -114,13 +122,16 @@ const sites_config = {
 						{ ip: "81.0.217.179:27976", demos: "https://csgo.gamesites.cz/dema/index.php?server=TTT2" }
 					],
 					banOrder: [
+						{ reason: "Nadávky střední", time: 120, type: SB_CHAT_AND_VOICE },
 						{ reason: "Nadávky velké", time: 720, type: SB_CHAT_AND_VOICE },
 						{ reason: "Nadávky neúnosné", time: 2880, type: SB_CHAT_AND_VOICE },
-						{ reason: "Zneužívání bloků", time: 60, type: SB_GAME },
-						{ reason: "Bugování pod mapu", time: 240, type: SB_GAME },
-						{ reason: "Úmyslné kažení hry", time: 720, type: SB_GAME },
-						{ reason: "Ghosting", time: 1440, type: SB_GAME },
-						{ reason: "BunnyHop", time: 10080, type: SB_GAME },
+						{ reason: "Random kill", time: 240, type: SB_GAME },
+						{ reason: "Random hity", time: 240, type: SB_GAME },
+						{ reason: "Zneužívání bloků", time: 180, type: SB_GAME },
+						{ reason: "Bugování pod mapu", time: 360, type: SB_GAME },
+						{ reason: "Ghosting in-game", time: 2880, type: SB_GAME },
+						{ reason: "Ghosting out of game", time: 10080, type: SB_GAME },
+						{ reason: "BunnyHop script", time: 10080, type: SB_GAME },
 						{ reason: "MultiHack", time: 0, type: SB_GAME }
 					]
 				}
