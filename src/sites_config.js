@@ -10,6 +10,7 @@ const sites_config = {
 			serverListPage: "https://www.gamesites.cz/servery/cs-go/",
 			forumPage: "https://www.gamesites.cz/forum/counter-strike-global-offensive-f49.html",
 			forumSections: [49, 873],
+			adminSections: [783],
 			sections: [
 				{
 					name: "JailBreak",

@@ -215,7 +215,8 @@ const addListenersToWidget = fttool => {
 		}
 		type = parseInt(type);
 
-		const ppUrl = fttool.closest('.post .postbody')?.querySelector(':scope > .author > a:first-child')?.href || '';
+		// only allow public posts to be attached as PP URLs
+		const ppUrl = (!thisPage.isAdminSection && fttool.closest('.post .postbody')?.querySelector(':scope > .author > a:first-child')?.href) || '';
 		
 		let tosend;
 		if (type === SB_GAME) {

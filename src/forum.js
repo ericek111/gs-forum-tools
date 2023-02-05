@@ -1,10 +1,11 @@
-let getThisPage = () => {
-	let res = {
+const getThisPage = () => {
+	const res = {
 		type: null,
 		site: null,
 		section: null,
 		forumSection: null,
-		forums: []
+		forums: [],
+		isAdminSection: false,
 	};
 
 	if (document.body.classList.contains("section-viewtopic")) {
@@ -15,44 +16,53 @@ let getThisPage = () => {
 		res.type = "index";
 	}
 
-	let forumPathObj = document.querySelectorAll('#page-header ul.navlinks > li.icon-home a');
-	for (var i = forumPathObj.length - 1; i >= 0; i--) {
-		let forumUrl = forumPathObj[i].href;
+	const navLinks = document.querySelectorAll('#page-header ul.navlinks > li.icon-home a');
+	for (const navLink of navLinks) {
+		const forumUrl = navLink.href;
 		let forumId = forumUrl.substring(forumUrl.lastIndexOf('f') + 1, forumUrl.length - '.html'.length);
-		if (forumId.length > 0)
-			res.forums.push(parseInt(forumId, 10));
+		if (!forumId)
+			continue;
+
+		forumId = parseInt(forumId, 10);
+		res.forums.push(forumId);
 	}
 
-	if (res.forums.length > 0) {
-		sites_config.sites.forEach((site, idx) => {
-			if (site.forumSections.filter(fid => res.forums.includes(fid)).length === 0) {
-				res.site = site;
-			}
-			site.sections.forEach((section, sectionidx) => {
-				let matchingForumSections = section.forumSections.filter(sobj => res.forums.includes(sobj.fid));
-				if (matchingForumSections.length > 0) {
-					res.site = site;
-					res.section = section;
-					res.forumSection = matchingForumSections[0];
-				}
-			});
-		});
+	// no forums in the navlinks
+	if (res.forums.length === 0) {
+		return res;
+	}
+
+	for (const site of sites_config.sites) {
+		if (site.forumSections.filter(fid => res.forums.includes(fid)).length === 0) {
+			res.site = site;
+		}
+
+		for (const section of site.sections) {
+			const matchingForumSection = section.forumSections.find(sobj => res.forums.includes(sobj.fid));
+			if (matchingForumSection === undefined)
+				continue;
+
+			res.site = site;
+			res.section = section;
+			res.forumSection = matchingForumSection;
+			res.isAdminSection = site.adminSections?.some(fid => res.forums.includes(fid)) || false;
+			break;
+		}
 	}
 
 	return res;
 }
 
-let doContents = () => {
-	var elements = document.body.querySelectorAll('#content div.post div.postbody div.content');
-	for (var i = 0; i < elements.length; i++) {
-		processSIDsInDocument(elements[i]);
+const doTopic = () => {
+	const postContents = document.body.querySelectorAll('#content div.post div.postbody div.content');
+	for (const postContent of postContents) {
+		processSIDsInDocument(postContent);
 	}
 }
 
-let doPage = () => {
-	if (thisPage.type == "topic")
-		doContents();
-}
+const thisPage = getThisPage();
+console.log('GS Forum Tools found page: ', thisPage);
 
-var thisPage = getThisPage();
-doPage();
+if (thisPage.type == "topic") {
+	doTopic();
+}
