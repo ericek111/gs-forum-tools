@@ -142,3 +142,19 @@ article div.server div.players {
 	width: 55px !important;
 }
 
+/************** TOPIC HIGHLIGHTING **************/
+.topiclist .row .topictitle .ft-highlight {
+	border-radius: 3px;
+	padding: 2px 5px;
+	color: white;
+}
+.topiclist .row .topictitle .ft-highlight.posralto {
+	color: #24ff70;
+	transform: skewY(-11deg);
+	display: inline-block;
+	font-weight: bold;
+	text-decoration: underline;
+	background-image: linear-gradient(to right, #ff6ff4 , #ff0023);
+	margin-top: 12px;
+	margin-bottom: 10px;
+}

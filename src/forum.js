@@ -60,7 +60,47 @@ const doTopic = () => {
 	}
 }
 
+const highlightTopicTitles = () => {
+	// Thanks, Amby!
+
+	const replMap = [
+		{ orig: ['V', 'Vyřešeno', 'Vyriešené', 'Vyr'], with: 'Vyřešeno', background: '#09b509' },
+		{ orig: ['N', 'Nedostatečné', 'Ned',], with: 'Nedostatečné', background: '#ef3d3d' },
+		{ orig: ['Čeká se'], with: 'Čeká se', background: '#5a9afb' },
+		{ orig: ['Mimo vzor'], with: 'Mimo vzor', background: '#ef3d3d' },
+		{ orig: ['Duplicita', 'Dup'], with: 'Duplicita', background: '#5f5f5f' },
+		{ orig: ['Neřešitelné', 'Neriešiteľné'], with: 'Neřešitelné', background: '#5f5f5f' },
+		{ orig: ['Čekání na CHH', 'Čeká se na CHH', 'CHH'], with: 'Čekání na CHH', background: '#5a9afb' },
+		{ orig: ['BPR'], with: 'POSRAL TO!', background: '#24ff70', className: 'posralto' },
+	];
+
+	const titles = document.querySelectorAll('.topiclist .row .topictitle');
+	for (const titleEl of titles) {
+		const oldTitle = titleEl.innerText;
+
+		// Extract prefix tags without brackets containing unicode letters and basic punctuation
+		const newTitle = oldTitle.replace(/^[\[\(]\s*([\p{L}\.,\s]+)\s*[\]\)]\s*(.+)$/ui, (match, p1, p2) => {
+			// strip punctuation and symbols
+			const replKey = p1.replace(/[\p{P}\p{S}]/gu, '');
+			const replEntry = replMap.find(entry => entry.orig.includes(replKey));
+			if (!replEntry) {
+				// Unknown tag, leave it as it is.
+				return match;
+			}
+
+			let tag = `<span style="background-color: ${replEntry.background}" class="ft-highlight ${replEntry.className || ''}">${replEntry.with}</span> ${p2}`;
+			return tag;
+		});
+
+		if (newTitle !== oldTitle) {
+			titleEl.innerHTML = newTitle;
+		}
+	}
+}
+
 const thisPage = getThisPage();
 if (thisPage.type == "topic") {
 	doTopic();
+} else if (thisPage.type == "forum") {
+	highlightTopicTitles();
 }
