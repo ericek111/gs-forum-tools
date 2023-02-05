@@ -70,7 +70,7 @@ const doTopicHighlighting = () => {
 			highlightTopic(topics[i]);
 		}
 
-	} else if(thisPage.forumSection.shortname = "PP") {
+	} else if(thisPage.forumSection.shortname == "PP") {
 		topics = document.querySelectorAll(".topiclist.topics")[1].children;
 		for(var i = 0; i < topics.length; i++) {
 			highlightTopic(topics[i]);
