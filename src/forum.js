@@ -61,8 +61,6 @@ const doTopic = () => {
 }
 
 const thisPage = getThisPage();
-console.log('GS Forum Tools found page: ', thisPage);
-
 if (thisPage.type == "topic") {
 	doTopic();
 }
