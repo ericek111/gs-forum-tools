@@ -33,7 +33,8 @@ const getThisPage = () => {
 	}
 
 	for (const site of sites_config.sites) {
-		if (site.forumSections.filter(fid => res.forums.includes(fid)).length === 0) {
+		// we are in one of the more "general" parts of some site's (CS:GO, CS 1.6) forum
+		if (site.forumSections.find(fid => res.forums.includes(fid)) !== undefined) {
 			res.site = site;
 		}
 
@@ -102,5 +103,7 @@ const thisPage = getThisPage();
 if (thisPage.type == "topic") {
 	doTopic();
 } else if (thisPage.type == "forum") {
-	highlightTopicTitles();
+	if (thisPage?.forumSection?.shortname === 'PP') {
+		highlightTopicTitles();
+	}
 }
