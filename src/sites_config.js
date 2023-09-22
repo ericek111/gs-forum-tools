@@ -15,7 +15,7 @@ const sites_config = {
 				{
 					name: "JailBreak",
 					sourcebans: "https://banlist.gamesites.cz/csgo/jb/",
-					hlstats: "http://hlstats.fakaheda.eu/hlxce_186497/hlstats.php",
+					hlstats: "https://hlstats.fakaheda.eu/hlxce_186497/hlstats.php",
 					forumSections: [
 						{ fid: 954, shortname: "PP" },
 						{ fid: 1014, shortname: "AA" },
@@ -51,7 +51,7 @@ const sites_config = {
 				{
 					name: "ALL",
 					sourcebans: "https://banlist.gamesites.cz/csgo/aim/",
-					hlstats: "http://hlstats.fakaheda.eu/hlxce_187068/hlstats.php",
+					hlstats: "https://hlstats.fakaheda.eu/hlxce_187068/hlstats.php",
 					forumSections: [
 						{ fid: 976, shortname: "PP" }
 					],
@@ -83,7 +83,7 @@ const sites_config = {
 				{
 					name: "Jump",
 					sourcebans: "https://banlist.gamesites.cz/csgo/jump/",
-					hlstats: "http://hlstats.fakaheda.eu/hlxce_189275/hlstats.php",
+					hlstats: "https://hlstats.fakaheda.eu/hlxce_189275/hlstats.php",
 					forumSections: [
 						{ fid: 992, shortname: "PP" }
 					],
@@ -105,7 +105,7 @@ const sites_config = {
 				{
 					name: "TTT",
 					sourcebans: "https://banlist.gamesites.cz/csgo/ttt/",
-					hlstats: "http://hlstats.fakaheda.eu/hlxce_205007/hlstats.php",
+					hlstats: "https://hlstats.fakaheda.eu/hlxce_205007/hlstats.php",
 					forumSections: [
 						{ fid: 1105, shortname: "PP" }
 					],
