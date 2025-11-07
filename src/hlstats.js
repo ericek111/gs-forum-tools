@@ -26,17 +26,17 @@ const getThisPage = () => {
 	return res;
 }
 
-const doHistoryRow = (tr) => {
+const doHistoryRow = (tr, type) => {
 	if (!tr)
 		return;
 
 	const rowDate = new Date(tr.children[0].innerText);
-	const rowServer = tr.children[3].innerText;
-	const rowMap = tr.children[4].innerText;
+	const rowServer = tr.children[3 - (type === "chat" ? 1 : 0)].innerText;
+	const rowMap = tr.children[4 - (type === "chat" ? 1 : 0)].innerText;
 
 	const rowServerEntry = thisPage.section.servers.find(el => el.name === rowServer);
 	if (!rowServerEntry)
-		doHistoryRow(tr.nextElementSibling);
+		doHistoryRow(tr.nextElementSibling, type);
 
 	chrome.runtime.sendMessage(chrome.runtime.id, {
 		action: 'GetGOTVRecord',
@@ -64,7 +64,7 @@ const doHistoryRow = (tr) => {
 		td.style.textAlign = "center";
 		tr.insertBefore(td, null);
 
-		doHistoryRow(tr.nextElementSibling);
+		doHistoryRow(tr.nextElementSibling, type);
 	});
 }
 
@@ -78,6 +78,21 @@ const doPlayerHistory = () => {
 			tr.insertBefore(td, null);
 		} else {
 			doHistoryRow(tr);
+			break;
+		}
+	}
+}
+
+const doChatHistory = () => {
+	const table = document.querySelector("table.data-table");
+	for (const tr of table.querySelectorAll("tr")) {
+		if (tr.className === "data-table-head") {
+			const td = document.createElement('td');
+			td.className = "fSmall";
+			td.innerHTML = "GOTV";
+			tr.insertBefore(td, null);
+		} else {
+			doHistoryRow(tr, "chat");
 			break;
 		}
 	}
@@ -173,4 +188,6 @@ if (thisPage.type === "playerhistory") {
 	doPlayerInfo();
 } else if (thisPage.type === "playersessions") {
 	doPlayerSessions();
+} else if (thisPage.type === "chathistory") {
+	loadServerNames(doChatHistory);
 }
